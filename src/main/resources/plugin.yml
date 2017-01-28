@@ -1,0 +1,8 @@
+name: GravityPvP
+main: me.semx11.gravitypvp.GravityPvp
+version: 0.1
+description: In this game the gravitational constant of projectiles and players change each minute!
+commands:
+    gravitypvp:
+        usage: /<command> <init, start, stop, players>
+        description: Control the game.
