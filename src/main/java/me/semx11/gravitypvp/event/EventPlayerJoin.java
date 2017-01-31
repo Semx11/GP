@@ -3,7 +3,6 @@ package me.semx11.gravitypvp.event;
 import me.semx11.gravitypvp.GravityPvp;
 import me.semx11.gravitypvp.util.GameState;
 import me.semx11.gravitypvp.util.Wrapper;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

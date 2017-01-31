@@ -75,7 +75,8 @@ public class GravityPvp extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        scoreboardHandler = new ScoreboardHandler(Bukkit.getScoreboardManager().getNewScoreboard());
+        this.scoreboardHandler = new ScoreboardHandler(
+                Bukkit.getScoreboardManager().getNewScoreboard());
 
         this.getCommand("gravitypvp").setExecutor(CommandGravityPvp.getInstance());
         this.registerEvents(
