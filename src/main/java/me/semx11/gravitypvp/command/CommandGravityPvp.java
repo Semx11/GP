@@ -1,13 +1,13 @@
 package me.semx11.gravitypvp.command;
 
+import java.util.List;
 import me.semx11.gravitypvp.GravityPvp;
 import me.semx11.gravitypvp.util.GameState;
 import me.semx11.gravitypvp.util.Wrapper;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class CommandGravityPvp implements CommandExecutor {
+public class CommandGravityPvp implements ICommandBase {
 
     private static final CommandGravityPvp INSTANCE = new CommandGravityPvp();
 
@@ -16,6 +16,11 @@ public class CommandGravityPvp implements CommandExecutor {
 
     public static CommandGravityPvp getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public String getCommandName() {
+        return "gravitypvp";
     }
 
     @Override
@@ -61,4 +66,9 @@ public class CommandGravityPvp implements CommandExecutor {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s,
+            String[] strings) {
+        return null;
+    }
 }

@@ -3,6 +3,7 @@ package me.semx11.gravitypvp;
 import java.util.Arrays;
 import java.util.Objects;
 import me.semx11.gravitypvp.command.CommandGravityPvp;
+import me.semx11.gravitypvp.command.ICommandBase;
 import me.semx11.gravitypvp.event.EventFallDamage;
 import me.semx11.gravitypvp.event.EventPlayerJoin;
 import me.semx11.gravitypvp.event.EventPlayerQuit;
@@ -11,6 +12,7 @@ import me.semx11.gravitypvp.gravity.GravityHandler;
 import me.semx11.gravitypvp.scoreboard.ScoreboardHandler;
 import me.semx11.gravitypvp.util.GameState;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -78,7 +80,10 @@ public class GravityPvp extends JavaPlugin {
         this.scoreboardHandler = new ScoreboardHandler(
                 Bukkit.getScoreboardManager().getNewScoreboard());
 
-        this.getCommand("gravitypvp").setExecutor(CommandGravityPvp.getInstance());
+        this.registerCommands(
+                CommandGravityPvp.getInstance()
+        );
+
         this.registerEvents(
                 EventPlayerJoin.getInstance(),
                 EventPlayerQuit.getInstance(),
@@ -91,6 +96,13 @@ public class GravityPvp extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getLogger().info("GravityPvP unloaded.");
+    }
+
+    private void registerCommands(ICommandBase... commands) {
+        Arrays.stream(commands).forEach(command -> {
+            this.getCommand(command.getCommandName()).setExecutor(command);
+            this.getCommand(command.getCommandName()).setTabCompleter(command);
+        });
     }
 
     private void registerEvents(Listener... events) {
@@ -118,9 +130,8 @@ public class GravityPvp extends JavaPlugin {
                 .runTaskTimerAsynchronously(this, GravityConstant::randomize, 0, 1200);
         this.gravityTask = Bukkit.getScheduler()
                 .runTaskTimerAsynchronously(this, new GravityHandler(), 0, 1);
-        this.endGameTask = Bukkit.getScheduler().runTaskLaterAsynchronously(this, () -> {
-            setGameState(GameState.FINISHED);
-        }, 6000);
+        this.endGameTask = Bukkit.getScheduler()
+                .runTaskLaterAsynchronously(this, () -> setGameState(GameState.FINISHED), 6000);
     }
 
     private void stopGame() {
