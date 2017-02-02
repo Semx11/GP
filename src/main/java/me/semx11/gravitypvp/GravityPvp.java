@@ -5,6 +5,7 @@ import java.util.Objects;
 import me.semx11.gravitypvp.command.CommandGravityPvp;
 import me.semx11.gravitypvp.command.ICommandBase;
 import me.semx11.gravitypvp.event.EventFallDamage;
+import me.semx11.gravitypvp.event.EventPlayerDeath;
 import me.semx11.gravitypvp.event.EventPlayerJoin;
 import me.semx11.gravitypvp.event.EventPlayerQuit;
 import me.semx11.gravitypvp.gravity.GravityConstant;
@@ -12,7 +13,6 @@ import me.semx11.gravitypvp.gravity.GravityHandler;
 import me.semx11.gravitypvp.scoreboard.ScoreboardHandler;
 import me.semx11.gravitypvp.util.GameState;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -86,6 +86,7 @@ public class GravityPvp extends JavaPlugin {
         this.registerEvents(
                 EventPlayerJoin.getInstance(),
                 EventPlayerQuit.getInstance(),
+                EventPlayerDeath.getInstance(),
                 EventFallDamage.getInstance());
 
         this.getLogger().info("GravityPvP loaded.");
@@ -120,7 +121,7 @@ public class GravityPvp extends JavaPlugin {
                 getScoreboard().update();
                 this.countdownTask.cancel();
             }
-        }, 0, 20);
+        }, 20, 20);
     }
 
     private void startGame() {
