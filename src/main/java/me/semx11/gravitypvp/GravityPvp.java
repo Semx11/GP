@@ -81,14 +81,12 @@ public class GravityPvp extends JavaPlugin {
                 Bukkit.getScoreboardManager().getNewScoreboard());
 
         this.registerCommands(
-                CommandGravityPvp.getInstance()
-        );
+                CommandGravityPvp.getInstance());
 
         this.registerEvents(
                 EventPlayerJoin.getInstance(),
                 EventPlayerQuit.getInstance(),
-                EventFallDamage.getInstance()
-        );
+                EventFallDamage.getInstance());
 
         this.getLogger().info("GravityPvP loaded.");
     }
@@ -146,7 +144,7 @@ public class GravityPvp extends JavaPlugin {
     }
 
     public int getCountdown() {
-        return countdown;
+        return this.countdown;
     }
 
 }

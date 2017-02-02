@@ -1,5 +1,7 @@
 package me.semx11.gravitypvp.command;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import me.semx11.gravitypvp.GravityPvp;
 import me.semx11.gravitypvp.util.GameState;
@@ -53,7 +55,6 @@ public class CommandGravityPvp implements ICommandBase {
                     GravityPvp.setMaxPlayers(Integer.parseInt(args[1]));
                 } catch (NumberFormatException e) {
                     sender.sendMessage(Wrapper.format("&cInvalid number."));
-                    GravityPvp.setMaxPlayers(4);
                 }
                 if (Wrapper.getOnlineCount() >= GravityPvp.getMaxPlayers()) {
                     GravityPvp.setGameState(GameState.STARTING);
@@ -67,8 +68,10 @@ public class CommandGravityPvp implements ICommandBase {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s,
-            String[] strings) {
-        return null;
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label,
+            String[] args) {
+        return args.length == 1
+                ? Arrays.asList("init", "start", "stop", "players")
+                : Collections.emptyList();
     }
 }

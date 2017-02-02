@@ -54,7 +54,7 @@ public enum GravityConstant {
     }
 
     public double get() {
-        return value;
+        return this.value;
     }
 
     @Override
